@@ -9,15 +9,22 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.29.0",
-    "@mariozechner/pi-coding-agent": "latest",
-    "@mariozechner/pi-ai": "latest",
-    "typebox": "latest"
+    "@modelcontextprotocol/sdk": "^1.29.0"
   },
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "@mariozechner/pi-ai": "^0.71.1",
+    "@mariozechner/pi-coding-agent": "^0.71.1",
+    "typebox": "^1.1.37",
+    "typescript": "^6.0.3"
   },
   "pi": {
-    "extensions": ["./src/index.ts"]
+    "extensions": [
+      "./src/index.ts"
+    ]
+  },
+  "peerDependencies": {
+    "@mariozechner/pi-ai": "*",
+    "@mariozechner/pi-coding-agent": "*",
+    "typebox": "*"
   }
 }
