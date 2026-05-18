@@ -5,10 +5,12 @@ npm-debug.log*
 
 # Local pi/agent wiring and runtime state
 .pi/
-.cueloop/
 .ralph/
 
 # Local env/auth files
 .env
 .env.*
 .npmrc
+
+# CueLoop local/runtime state (do not commit)
+.cueloop/
