@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here.
 
+## 0.1.2 - 2026-05-23
+
+### Changed
+- Updated the local pi package baseline to `@earendil-works/*` `0.75.5` and regenerated the npm lockfile.
+- Reviewed the pi `0.75.5` changelog and package guidance; peer dependencies remain aligned with pi package best practices.
+
 ## 0.1.1 - 2026-05-18
 
 ### Changed
