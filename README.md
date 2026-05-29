@@ -1,4 +1,6 @@
-# pi-zai-mcp
+# pi-zai-mcp-cn
+
+Fork of [pi-zai-mcp](https://github.com/fitchmultz/pi-zai-mcp) with **Chinese domestic endpoint support** (open.bigmodel.cn) for GLM Coding Plan users.
 
 Give pi agents Z.ai-powered web search, URL reading, repository reading, and vision tools through MCP without leaving a pi session. This is an unofficial community package, not an official Z.ai package.
 
@@ -81,10 +83,11 @@ pi -e .
 | Variable | Required | Default | Purpose |
 | --- | --- | --- | --- |
 | `Z_AI_API_KEY` / `ZAI_API_KEY` | Yes | none | Z.ai API key used for HTTP MCP Bearer auth and the vision stdio server. |
+| `Z_AI_MCP_BASE_URL` | No | `https://open.bigmodel.cn/api` | Base URL for MCP HTTP endpoints. Defaults to domestic (bigmodel.cn). Set to `https://api.z.ai/api` for overseas. |
 | `Z_AI_MCP_SERVERS` | No | `all` | Comma-separated subset of `search,reader,zread,vision`. |
 | `Z_AI_MCP_AUTO_DISCOVER` | No | off | Set to `1`, `true`, `yes`, or `on` to discover and register server-specific wrappers at extension startup. |
 | `Z_AI_MCP_TIMEOUT_MS` | No | `30000` | Per-connection/tool-call timeout in milliseconds. |
-| `Z_AI_MODE` | No | `ZAI` | Passed through to the vision MCP server. |
+| `Z_AI_MODE` | No | `ZHIPU` | Passed through to the vision MCP server. Defaults to `ZHIPU` (domestic). Set to `ZAI` for overseas. |
 
 Example: disable vision server access for a lighter setup.
 

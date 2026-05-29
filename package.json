@@ -1,7 +1,7 @@
 {
-  "name": "pi-zai-mcp",
-  "version": "0.1.4",
-  "description": "Unofficial pi package that exposes Z.ai MCP server tools for web search, URL reading, repository reading, and vision workflows.",
+  "name": "pi-zai-mcp-cn",
+  "version": "0.1.5",
+  "description": "Fork of pi-zai-mcp with Chinese domestic endpoint support (open.bigmodel.cn) for GLM Coding Plan users.",
   "type": "module",
   "author": "Mitch Fultz (https://github.com/fitchmultz)",
   "license": "MIT",
@@ -15,7 +15,10 @@
     "extension",
     "mcp",
     "z-ai",
-    "zai"
+    "zai",
+    "bigmodel",
+    "zhipu",
+    "glm-coding"
   ],
   "repository": {
     "type": "git",

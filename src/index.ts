@@ -15,8 +15,8 @@ import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const EXTENSION_NAME = "pi-zai-mcp";
-const EXTENSION_VERSION = "0.1.0";
+const EXTENSION_NAME = "pi-zai-mcp-cn";
+const EXTENSION_VERSION = "0.1.1";
 const VISION_MCP_PACKAGE = "@z_ai/mcp-server";
 const VISION_MCP_VERSION = "0.1.4";
 const VISION_MCP_BIN = "zai-mcp-server";
@@ -77,8 +77,12 @@ function positiveIntegerFromEnv(name: string, fallback: number): number {
   return Number.isFinite(parsed) && parsed > 0 ? Math.trunc(parsed) : fallback;
 }
 
+function getMcpBaseUrl(): string {
+  return process.env.Z_AI_MCP_BASE_URL || "https://open.bigmodel.cn/api";
+}
+
 function getApiKey(): string | undefined {
-  return process.env.Z_AI_API_KEY || process.env.ZAI_API_KEY;
+  return process.env.Z_AI_API_KEY || process.env.ZAI_API_KEY || process.env.ZHIPU_API_KEY;
 }
 
 function shouldAutoDiscoverTools(): boolean {
@@ -127,24 +131,26 @@ function createServers(): ManagedServer[] {
   const enabled = enabledServerIds();
   const visionCommand = resolveVisionServerCommand();
 
+  const baseUrl = getMcpBaseUrl();
+
   const all: ManagedServer[] = [
     {
       id: "search",
       label: "Z.ai Web Search",
       kind: "http",
-      url: "https://api.z.ai/api/mcp/web_search_prime/mcp",
+      url: `${baseUrl}/mcp/web_search_prime/mcp`,
     },
     {
       id: "reader",
       label: "Z.ai Web Reader",
       kind: "http",
-      url: "https://api.z.ai/api/mcp/web_reader/mcp",
+      url: `${baseUrl}/mcp/web_reader/mcp`,
     },
     {
       id: "zread",
       label: "Z.ai Zread Repository Reader",
       kind: "http",
-      url: "https://api.z.ai/api/mcp/zread/mcp",
+      url: `${baseUrl}/mcp/zread/mcp`,
     },
     {
       id: "vision",
@@ -155,7 +161,7 @@ function createServers(): ManagedServer[] {
       env: {
         ...environment(),
         ...(apiKey ? { Z_AI_API_KEY: apiKey } : {}),
-        Z_AI_MODE: process.env.Z_AI_MODE || "ZAI",
+        Z_AI_MODE: process.env.Z_AI_MODE || "ZHIPU",
       },
     },
   ];
