@@ -77,8 +77,24 @@ function positiveIntegerFromEnv(name: string, fallback: number): number {
   return Number.isFinite(parsed) && parsed > 0 ? Math.trunc(parsed) : fallback;
 }
 
+const DOMESTIC_BASE_URL = "https://open.bigmodel.cn/api";
+const OVERSEAS_BASE_URL = "https://api.z.ai/api";
+const DOMESTIC_VISION_MODE = "ZHIPU";
+const OVERSEAS_VISION_MODE = "ZAI";
+
+function isDomesticRegion(): boolean {
+  const raw = process.env.Z_AI_MCP_REGION?.trim().toLowerCase();
+  return raw === "cn" || raw === "china" || raw === "zhipu" || raw === "domestic";
+}
+
 function getMcpBaseUrl(): string {
-  return process.env.Z_AI_MCP_BASE_URL || "https://open.bigmodel.cn/api";
+  if (process.env.Z_AI_MCP_BASE_URL) return process.env.Z_AI_MCP_BASE_URL;
+  return isDomesticRegion() ? DOMESTIC_BASE_URL : OVERSEAS_BASE_URL;
+}
+
+function getVisionMode(): string {
+  if (process.env.Z_AI_MODE) return process.env.Z_AI_MODE;
+  return isDomesticRegion() ? DOMESTIC_VISION_MODE : OVERSEAS_VISION_MODE;
 }
 
 function getApiKey(): string | undefined {
@@ -161,7 +177,7 @@ function createServers(): ManagedServer[] {
       env: {
         ...environment(),
         ...(apiKey ? { Z_AI_API_KEY: apiKey } : {}),
-        Z_AI_MODE: process.env.Z_AI_MODE || "ZHIPU",
+        Z_AI_MODE: getVisionMode(),
       },
     },
   ];
