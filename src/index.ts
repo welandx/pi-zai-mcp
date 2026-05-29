@@ -82,7 +82,7 @@ function getMcpBaseUrl(): string {
 }
 
 function getApiKey(): string | undefined {
-  return process.env.Z_AI_API_KEY || process.env.ZAI_API_KEY || process.env.ZHIPU_API_KEY;
+  return process.env.ZHIPU_API_KEY || process.env.Z_AI_API_KEY || process.env.ZAI_API_KEY;
 }
 
 function shouldAutoDiscoverTools(): boolean {
